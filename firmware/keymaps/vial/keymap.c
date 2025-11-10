@@ -87,6 +87,7 @@ void keyboard_post_init_user(void) {
     rgblight_layers = my_rgb_layers;
     rgblight_sethsv_noeeprom(RGBLIGHT_DEFAULT_VAL, RGBLIGHT_DEFAULT_VAL, RGBLIGHT_DEFAULT_VAL);
     rgblight_mode_noeeprom(RGBLIGHT_MODE_STATIC_LIGHT);
+    combo_enable();
 }
 
 bool led_update_user(led_t led_state) {
@@ -104,6 +105,10 @@ layer_state_t default_layer_state_set_user(layer_state_t state) {
     rgblight_set_layer_state(5, layer_state_cmp(state, 5));
     rgblight_set_layer_state(6, layer_state_cmp(state, 6));
     //rgblight_set_layer_state(7, layer_state_cmp(state, 7));
+    if (layer_state_cmp(state, 4))
+        combo_disable();
+    else
+        combo_enable();
     return state;
 }
 
@@ -117,6 +122,10 @@ layer_state_t layer_state_set_user(layer_state_t state) {
     rgblight_set_layer_state(5, layer_state_cmp(state, 5));
     rgblight_set_layer_state(6, layer_state_cmp(state, 6));
     //rgblight_set_layer_state(7, layer_state_cmp(state, 7));
+    if (layer_state_cmp(state, 4))
+        combo_disable();
+    else
+        combo_enable();
     return state;
 }
 
